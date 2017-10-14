@@ -10,103 +10,117 @@ function calcBodyCost(body) {
 
 function getCreepBody(maxCost) {
 
-    var lvl1 = [
-        WORK,
-        CARRY,
-        MOVE
-    ];
-    
-    var lvl2 = [
-        WORK,
-        CARRY,CARRY,
-        MOVE
+    var genericBuilds = [
+        [
+            WORK,
+            CARRY,
+            MOVE
+        ],
+        [
+            WORK,
+            CARRY, CARRY,
+            MOVE
+        ],
+        [
+            WORK,
+            CARRY, CARRY,
+            MOVE,  MOVE
+        ],
+        [
+            WORK, WORK,
+            CARRY,CARRY,
+            MOVE, MOVE
+        ],
+        [
+            WORK, WORK,
+            CARRY,CARRY,CARRY,
+            MOVE, MOVE
+        ],
+        [
+            WORK, WORK,
+            CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+        ],
+        [
+            WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+        ]
     ];
 
-    var lvl3 = [
-        WORK,
-        CARRY,CARRY,
-        MOVE, MOVE
-    ];
+    genericBuilds.reverse();
 
-    var lvl4 = [
-        WORK, WORK,
-        CARRY,CARRY,
-        MOVE, MOVE
-    ];
-
-    var lvl5 = [
-        WORK, WORK,
-        CARRY,CARRY,CARRY,
-        MOVE, MOVE
-    ];
-
-    var lvl6 = [
-        WORK, WORK,
-        CARRY,CARRY,CARRY,
-        MOVE, MOVE, MOVE
-    ];
-
-    var lvl7 = [
-        WORK, WORK, WORK,
-        CARRY,CARRY,CARRY,
-        MOVE, MOVE, MOVE
-    ];
-
-    var lvl8 = [
-        WORK, WORK, WORK,
-        CARRY,CARRY,CARRY,CARRY,
-        MOVE, MOVE, MOVE
-    ];
-
-    var lvl9 = [
-        WORK, WORK, WORK,
-        CARRY,CARRY,CARRY,CARRY,
-        MOVE, MOVE, MOVE, MOVE
-    ];
-
-    var lvl10 = [
-        WORK, WORK, WORK, WORK,
-        CARRY,CARRY,CARRY,CARRY,
-        MOVE, MOVE, MOVE, MOVE
-    ];
-    
-    
-    var body;
-    
-    switch (true) {
-        case (maxCost - calcBodyCost(lvl10) >= 0):
-            body = lvl10;
-            break;
-        case (maxCost - calcBodyCost(lvl9) >= 0):
-            body = lvl9;
-            break;
-        case (maxCost - calcBodyCost(lvl8) >= 0):
-            body = lvl8;
-            break;
-        case (maxCost - calcBodyCost(lvl7) >= 0):
-            body = lvl7;
-            break;
-        case (maxCost - calcBodyCost(lvl6) >= 0):
-            body = lvl6;
-            break;
-        case (maxCost - calcBodyCost(lvl5) >= 0):
-            body = lvl5;
-            break;
-        case (maxCost - calcBodyCost(lvl4) >= 0):
-            body = lvl4;
-            break;
-        case (maxCost - calcBodyCost(lvl3) >= 0):
-            body = lvl3;
-            break;
-        case (maxCost - calcBodyCost(lvl2) >= 0):
-            body = lvl2;
-            break;
-        default:
-            body = lvl1;
-            break;
+    for (var index in genericBuilds) {
+        genericBuild = genericBuilds[index];
+        
+        if (maxCost - calcBodyCost(genericBuild) >= 0) {
+            console.log('build cost: ' + calcBodyCost(genericBuild));
+            return genericBuild;
+        }
+        else {
+            console.log('build cost: ' + calcBodyCost(genericBuild));
+        }
     }
-
-    return body;
 }
 
 function spawnCreep(role, maxCost) {
@@ -141,9 +155,9 @@ var managerPopulation = {
         clearDeadCreepMemory();
         
         var desiredPopulation = {
-            builder: 5,
-            harvester: 3,
-            upgrader: 8
+            builder: 3,
+            harvester: 4,
+            upgrader: 6
         };
         
         var currentPopulation = {
@@ -157,7 +171,7 @@ var managerPopulation = {
         // If there are zero of the current population, spawn the biggest creep possible right now.
         var energyAvailable = Game.rooms['W8N3'].energyAvailable;
 
-        if(currentPopulation.harvester < 2) {
+        if(currentPopulation.harvester < 3) {
             spawnCreep('harvester', energyAvailable);
         }
         else if(currentPopulation.builder < 1) {

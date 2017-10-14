@@ -10,7 +10,7 @@ module.exports.loop = function () {
     
     
     // Manage population every 10 ticks.
-    if(Game.time%1 == 0) {
+    if(Game.time%10 == 0) {
         managerPopulation.run();
     }
     
