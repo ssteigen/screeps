@@ -27,12 +27,22 @@ var roleHarvester = {
         return targets[targetIndex].id;
     },
 
+    getClosestLink: function (creep) {
+        var link = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            filter: function(structure) {
+                return (structure.structureType == STRUCTURE_LINK && structure.energy < structure.energyCapacity)
+            }
+        });
+
+        return link;
+    },
+
     run: function(creep) {
 
         if(typeof creep.memory.harvesting == 'undefined' || (!creep.memory.harvesting && creep.carry.energy == 0)) {
             creep.memory.harvesting = true;
             creep.say('🔄 harvest');
-            creep.memory.sourceIndex = roleCreep.getSourceIndex(creep);
+            creep.memory.sourceId = roleCreep.getSourceId(creep);
         }
         if(creep.memory.harvesting && creep.carry.energy == creep.carryCapacity) {
             creep.memory.harvesting = false;
@@ -47,6 +57,7 @@ var roleHarvester = {
             }
         }
         else {
+            var linkA = Game.getObjectById('ac4c1f69c0ebe2a');
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -54,7 +65,14 @@ var roleHarvester = {
                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                 }
             });
-            if(targets.length > 0) {
+            var storage = Game.getObjectById('49602f5f2afd59c');
+            
+            if (linkA.energy < linkA.energyCapacity) {
+                if(creep.transfer(linkA, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(linkA, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
+            else if(targets.length > 0) {
                 var target = Game.getObjectById(creep.memory.targetId);
                 
                 if (!target || typeof target == 'undefined' || target.energy == target.energyCapacity) {
@@ -64,6 +82,11 @@ var roleHarvester = {
 
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
+            else if(storage.energy < storage.energyCapacity) {
+                if(creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(storage, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else {

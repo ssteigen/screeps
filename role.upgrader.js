@@ -3,11 +3,10 @@ var roleCreep = require('role.creep');
 var roleUpgrader = {
 
     run: function(creep) {
-        
         if(typeof creep.memory.upgrading == 'undefined' || (creep.memory.upgrading && creep.carry.energy == 0)) {
             creep.memory.upgrading = false;
             creep.say('🔄 harvest');
-            creep.memory.sourceIndex = roleCreep.getSourceIndex(creep);
+            creep.memory.sourceId = roleCreep.getSourceId(creep);
         }
         if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
             creep.memory.upgrading = true;
@@ -20,7 +19,14 @@ var roleUpgrader = {
             }
         }
         else {
-            roleCreep.harvest(creep);
+            var linkB = Game.getObjectById('c5ee2091a92a6e3');
+            if (linkB.energy > 0) {
+                console.log(linkB.energy);
+                roleCreep.withdraw(creep, linkB);
+            }
+            else {
+                roleCreep.harvest(creep);
+            }
         }
     }
 };

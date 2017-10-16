@@ -1,18 +1,33 @@
 roleCreep = {
-    
-    getSourceIndex:function(creep) {
-        // Find all sources.
-        var sources = creep.room.find(FIND_SOURCES);
-        
-        // Choose a random one.
-        return Math.round(Math.random(0, sources.length));
+    // Get all sources.
+    getSources:function(creep) {
+        return creep.room.find(FIND_SOURCES);
+    },
+
+    // Get the ID of a random source.
+    getSourceId:function(creep) {
+        var sources = roleCreep.getSources(creep);
+        var sourceIndex = Math.round(Math.random(0, sources.length));
+
+        return sources[sourceIndex].id;
     },
     
-    harvest:function(creep) {
-        var sourceIndex = creep.memory.sourceIndex;
-        var sources = creep.room.find(FIND_SOURCES);
-        if(creep.harvest(sources[sourceIndex]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(sources[sourceIndex], {visualizePathStyle: {stroke: '#ffaa00'}});
+
+    withdraw:function(creep, source) {
+        if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+        }
+    },
+
+    // Harvest energy from a source.
+    harvest:function(creep, source) {
+        // If a source is not provided, check the creep's memory.
+        if (typeof source == 'undefined') {
+            source = Game.getObjectById(creep.memory.sourceId);
+        }
+
+        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
         }
     },
     

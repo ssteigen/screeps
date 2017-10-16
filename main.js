@@ -6,9 +6,12 @@ var managerPopulation = require('manager.population');
 var managerRoad = require('manager.road');
 
 module.exports.loop = function () {
+    
+    var linkA = Game.getObjectById('ac4c1f69c0ebe2a');
+    var linkB = Game.getObjectById('c5ee2091a92a6e3');
 
-    
-    
+    linkA.transferEnergy(linkB);
+
     // Manage population every 10 ticks.
     if(Game.time%10 == 0) {
         managerPopulation.run();
@@ -25,19 +28,21 @@ module.exports.loop = function () {
     console.log('Energy: ' + energyAvailable + '/' + energyCapacity + ' (' + Math.round(energyAvailable/energyCapacity*100) + '%)');
 
     // Run tower.
-    var tower = Game.getObjectById('TOWER_ID');
+    var tower = Game.getObjectById('fb30ba9373bfd0b');
     if(tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
-
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {
             tower.attack(closestHostile);
         }
+        else {
+            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => structure.hits < structure.hitsMax
+            });
+            if(closestDamagedStructure) {
+                tower.repair(closestDamagedStructure);
+            }
+        }
+        
     }
 
     // Run creeps.

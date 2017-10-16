@@ -91,21 +91,21 @@ function getCreepBody(maxCost) {
             CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
             MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
         ],
-        [
-            WORK, WORK, WORK, WORK, WORK, WORK,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
-        ],
-        [
-            WORK, WORK, WORK, WORK, WORK, WORK,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
-        ],
-        [
-            WORK, WORK, WORK, WORK, WORK, WORK, WORK,
-            CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
-            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
-        ]
+        // [
+        //     WORK, WORK, WORK, WORK, WORK, WORK,
+        //     CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+        //     MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+        // ],
+        // [
+        //     WORK, WORK, WORK, WORK, WORK, WORK,
+        //     CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+        //     MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+        // ],
+        // [
+        //     WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+        //     CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,
+        //     MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+        // ]
     ];
 
     genericBuilds.reverse();
@@ -155,8 +155,8 @@ var managerPopulation = {
         clearDeadCreepMemory();
         
         var desiredPopulation = {
-            builder: 3,
-            harvester: 4,
+            builder: 2,
+            harvester: 5,
             upgrader: 6
         };
         

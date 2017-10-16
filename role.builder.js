@@ -3,12 +3,13 @@ var roleCreep = require('role.creep');
 var roleBuilder = {
 
     run: function(creep) {
-        
+
         if(typeof creep.memory.building == 'undefined' || (creep.memory.building && creep.carry.energy == 0)) {
             creep.memory.building = false;
             creep.say('🔄 harvest');
-            creep.memory.sourceIndex = roleCreep.getSourceIndex(creep);
+            creep.memory.sourceId = roleCreep.getSourceId(creep);
         }
+        
         if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
             creep.memory.building = true;
             creep.say('🚧 build');
