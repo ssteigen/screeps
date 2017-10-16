@@ -57,7 +57,7 @@ var roleHarvester = {
             }
         }
         else {
-            var linkA = Game.getObjectById('ac4c1f69c0ebe2a');
+            
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -65,14 +65,11 @@ var roleHarvester = {
                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                 }
             });
+            var linkA = Game.getObjectById('ac4c1f69c0ebe2a');
             var storage = Game.getObjectById('49602f5f2afd59c');
             
-            if (linkA.energy < linkA.energyCapacity) {
-                if(creep.transfer(linkA, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(linkA, {visualizePathStyle: {stroke: '#ffffff'}});
-                }
-            }
-            else if(targets.length > 0) {
+            
+            if(targets.length > 0) {
                 var target = Game.getObjectById(creep.memory.targetId);
                 
                 if (!target || typeof target == 'undefined' || target.energy == target.energyCapacity) {
@@ -82,6 +79,11 @@ var roleHarvester = {
 
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            }
+            else if (linkA.energy < linkA.energyCapacity) {
+                if(creep.transfer(linkA, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(linkA, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else if(storage.energy < storage.energyCapacity) {
