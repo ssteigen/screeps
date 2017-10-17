@@ -21,7 +21,6 @@ var roleUpgrader = {
         else {
             var linkB = Game.getObjectById('c5ee2091a92a6e3');
             if (linkB.energy > 0) {
-                console.log(linkB.energy);
                 roleCreep.withdraw(creep, linkB);
             }
             else {

@@ -155,15 +155,17 @@ var managerPopulation = {
         clearDeadCreepMemory();
         
         var desiredPopulation = {
-            builder: 2,
-            harvester: 5,
-            upgrader: 6
+            builder: 1,
+            harvester: 4,
+            upgrader: 3,
+            transporter: 1
         };
         
         var currentPopulation = {
             builder: countCreeps('builder'),
             harvester: countCreeps('harvester'),
-            upgrader: countCreeps('upgrader')
+            upgrader: countCreeps('upgrader'),
+            transporter: countCreeps('transporter')
         }
         
         console.log(JSON.stringify(currentPopulation));
@@ -180,6 +182,9 @@ var managerPopulation = {
         else if(currentPopulation.upgrader < 1) {
             spawnCreep('upgrader', energyAvailable);
         }
+        else if(currentPopulation.transporter < 1) {
+            spawnCreep('transporter', energyAvailable);
+        }
 
         // Otherwise, spawn the highest level.
         var energyCapacity = Game.rooms['W8N3'].energyCapacityAvailable;
@@ -192,6 +197,9 @@ var managerPopulation = {
         }
         else if(currentPopulation.upgrader < desiredPopulation.upgrader) {
             spawnCreep('upgrader', energyCapacity);
+        }
+        else if(currentPopulation.transporter < desiredPopulation.transporter) {
+            spawnCreep('transporter', energyCapacity);
         }
     
         // Spawn new creep.

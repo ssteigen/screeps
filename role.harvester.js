@@ -19,11 +19,8 @@ var roleHarvester = {
 
     getTargetId: function(creep) {
         var targets = roleHarvester.getTargets(creep);
-
-        if (targets.length > 0) {
-            targetIndex = Math.round(getRandomArbitrary(0, targets.length));
-        }
-
+        var targetIndex = Math.round(getRandomArbitrary(0, targets.length));
+        
         return targets[targetIndex].id;
     },
 
@@ -66,8 +63,7 @@ var roleHarvester = {
                 }
             });
             var linkA = Game.getObjectById('ac4c1f69c0ebe2a');
-            var storage = Game.getObjectById('49602f5f2afd59c');
-            
+            var storage = Game.getObjectById('3f5434cd1f52198');
             
             if(targets.length > 0) {
                 var target = Game.getObjectById(creep.memory.targetId);
